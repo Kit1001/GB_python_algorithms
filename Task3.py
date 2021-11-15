@@ -22,7 +22,7 @@ def find_median(list_, n=0):
 
 
 random.seed(42)
-some_list = list(range(101))  
-random.shuffle(some_list)
+some_list = [random.randint(-100, 100) for _ in range(random.randint(10, 100) * 2 + 1)]
 print(some_list)
-print(find_median(some_list))  # 50
+print(find_median(some_list))  # получается -3
+print(sorted(some_list)[len(some_list) // 2 + 1])  # проверяем результат с помощью сортировки, ответ тот же
