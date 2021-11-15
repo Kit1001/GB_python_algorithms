@@ -27,6 +27,6 @@ def find_median(list_, n=0):
 
 
 random.seed(42)
-some_list = [random.randint(-100, 100) for _ in range(random.randint(5, 500) * 2 + 1)]
+some_list = [random.randint(-100, 100) for _ in range(random.randint(5, 50) * 2 + 1)]
 print('median result', find_median(some_list))  # получается -3
 print('sorted result', sorted(some_list)[len(some_list) // 2])  # проверяем результат с помощью сортировки
