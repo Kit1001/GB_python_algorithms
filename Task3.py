@@ -22,7 +22,7 @@ def find_median(list_, n=0):
 
 
 random.seed(42)
-some_list = list(range(101))  # 50
+some_list = list(range(101))  
 random.shuffle(some_list)
 print(some_list)
-print(find_median(some_list))
+print(find_median(some_list))  # 50
