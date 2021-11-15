@@ -36,8 +36,8 @@ def find_median(list_, n=0):
 random.seed(42)
 some_list = [random.randint(-100, 100) for _ in range(random.randint(5, 50000) * 2 + 1)]
 start = time.time()
-# ищем медиану через функцию, получается 1, время выполнения ~ 0.23
+# ищем медиану через функцию, получается 1, время выполнения ~ 0.023
 print('median result', find_median(some_list), round((time.time() - start), 4))
 start = time.time()
-# проверяем результат с помощью сортировки, результат 1, время выполнения 0.008. Мой алгоритм медленнее почти в 30 раз
+# проверяем результат с помощью сортировки, результат 1, время выполнения 0.008. Мой алгоритм медленнее почти в 3 раза
 print('sorted result', sorted(some_list)[len(some_list) // 2], round((time.time() - start), 4))
