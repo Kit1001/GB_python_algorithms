@@ -2,13 +2,20 @@
 # Далее сравнивается размер двух списков и процедура повторяется для большего списка
 # пока не получится два одинаковых по размеру списка, с медианой в середине.
 import random
+import time
 
 
 def find_median(list_, n=0):
     random_index = random.randint(0, len(list_) - 1)
-    list_a = [x for x in list_ if x < list_[random_index]]
-    list_b = [x for x in list_ if x > list_[random_index]]
-    list_c = [x for x in list_ if x == list_[random_index]]
+    list_a, list_b, list_c = [], [], []
+    num = list_[random_index]
+    for x in list_:
+        if x < num:
+            list_a.append(x)
+        elif x > num:
+            list_b.append(x)
+        else:
+            list_c.append(x)
     # в случае если случайное число встречается несколько раз, необходимо исключить его только 1 раз
     # поэтому возвращаем его в списки. Нащупал это решение на практике, не до конца понимаю, почему без этого
     # алгоритм ломается, если числа в списке не уникальные
@@ -27,6 +34,10 @@ def find_median(list_, n=0):
 
 
 random.seed(42)
-some_list = [random.randint(-100, 100) for _ in range(random.randint(5, 50) * 2 + 1)]
-print('median result', find_median(some_list))  # получается -10
-print('sorted result', sorted(some_list)[len(some_list) // 2])  # проверяем результат с помощью сортировки
+some_list = [random.randint(-100, 100) for _ in range(random.randint(5, 50000) * 2 + 1)]
+start = time.time()
+# ищем медиану через функцию, получается 1, время выполнения ~ 0.23
+print('median result', find_median(some_list), round((time.time() - start), 4))
+start = time.time()
+# проверяем результат с помощью сортировки, результат 1, время выполнения 0.008. Мой алгоритм медленнее почти в 30 раз
+print('sorted result', sorted(some_list)[len(some_list) // 2], round((time.time() - start), 4))
