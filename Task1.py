@@ -1,3 +1,4 @@
+# Заменил цикл while на for
 import random
 
 
