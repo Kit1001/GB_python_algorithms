@@ -1,4 +1,3 @@
-# Не успел доделать до конца, в алгоритме где-то ошибка, работает не в 100% случаев.
 # Скрипт берет случайное число из списка и формирует два списка, в одном все числа больше, в другом меньше случайного.
 # Далее сравнивается размер двух списков и процедура повторяется для большего списка
 # пока не получится два одинаковых по размеру списка, с медианой в середине.
@@ -15,15 +14,15 @@ def find_median(list_, n=0):
     if len(list_a) + n == len(list_b):
         return list_[random_index]
     elif len(list_a) + n > len(list_b):
-        n -= len(list_b)
+        n -= len(list_b) + 1
         return find_median(list_a, n)
     elif len(list_b) > len(list_a) + n:
-        n += len(list_a)
+        n += len(list_a) + 1
         return find_median(list_b, n)
 
 
 random.seed(42)
-some_list = list(range(9))  # 5. Ломается на числе 13
+some_list = list(range(101))  # 50
 random.shuffle(some_list)
 print(some_list)
 print(find_median(some_list))
