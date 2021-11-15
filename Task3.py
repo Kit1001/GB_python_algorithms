@@ -6,8 +6,16 @@ import random
 
 def find_median(list_, n=0):
     random_index = random.randint(0, len(list_) - 1)
-    list_a = [x for x in list_ if x <= list_[random_index]]
+    list_a = [x for x in list_ if x < list_[random_index]]
     list_b = [x for x in list_ if x > list_[random_index]]
+    list_c = [x for x in list_ if x == list_[random_index]]
+    # в случае если случайное число встречается несколько раз, необходимо исключить его только 1 раз
+    # поэтому возвращаем его в списки. Нащупал это решение на практике, не до конца понимаю, почему без этого
+    # алгоритм ломается, если числа в списке не уникальные
+    if len(list_c) > 1:
+        while len(list_c) != 1:
+            append = list_a if len(list_c) % 2 == 0 else list_b
+            append.append(list_c.pop())
     if len(list_a) + n == len(list_b):
         return list_[random_index]
     elif len(list_a) + n > len(list_b):
@@ -19,6 +27,6 @@ def find_median(list_, n=0):
 
 
 random.seed(42)
-some_list = [random.randint(-100, 100) for _ in range(random.randint(5, 5000) * 2 + 1)]
-print('median result', find_median(some_list))  # получается 3
+some_list = [random.randint(-100, 100) for _ in range(random.randint(5, 500) * 2 + 1)]
+print('median result', find_median(some_list))  # получается -3
 print('sorted result', sorted(some_list)[len(some_list) // 2])  # проверяем результат с помощью сортировки
