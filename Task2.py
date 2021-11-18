@@ -8,9 +8,22 @@ class Node:
         self.right = right
 
 
-def build_code_table(node):
+def archive(string):
+    c = Counter(string)
+    c = [(k, v) for k, v in sorted(c.items(), key=lambda x: x[1], reverse=True)]
+
+    while len(c) > 1:
+        first = c.pop()
+        second = c.pop()
+        tmp = Node(first[0], second[0])
+        tmp_sum = first[1] + second[1]
+        c.append((tmp, tmp_sum))
+        c.sort(key=lambda x: x[1], reverse=True)
+    else:
+        c = c[0][0]
+
     code_table = {}
-    node_list = [(node, '')]
+    node_list = [(c, '')]
     tmp_list = []
 
     while len(node_list) > 0:
@@ -28,26 +41,12 @@ def build_code_table(node):
         node_list = tmp_list
         tmp_list = []
 
-    return code_table
+    coded_string = []
+    for i in string:
+        coded_string.append(code_table[i])
+
+    return coded_string, code_table
 
 
-string = 'Мама мыла раму!'
-c = Counter(string)
-# print(c.items())
-c = [(k, v) for k, v in sorted(c.items(), key=lambda x: x[1], reverse=True)]
-print(c)
-
-while len(c) > 1:
-    first = c.pop()
-    second = c.pop()
-    tmp = Node(first[0], second[0])
-    tmp_sum = first[1] + second[1]
-    c.append((tmp, tmp_sum))
-    c.sort(key=lambda x: x[1], reverse=True)
-    # print(c)
-else:
-    c = c[0][0]
-
-
-# print(c.left.right.right)
-print(build_code_table(c))
+string_ = 'Мама мыла раму!'
+print(archive(string_)[0])
